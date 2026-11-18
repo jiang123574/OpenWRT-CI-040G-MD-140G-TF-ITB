@@ -3,7 +3,7 @@
 # 集成恩山帖提到的两个第三方插件：
 #   1) rchen14b/luci-app-airoha-npu —— Airoha NPU/CPU/Frame Engine 状态面板
 #   2) naoki66/OpenWrt_ONU_CONFIG  —— 光模块数据展示（只取 luci 展示包，
-#      daemon/ponctl/pond 复用 ponwrt feed 自带版本，避免 Rust 重编译与包冲突）
+#      daemon/ponctl/pond 复用 immortalwrt feed 自带版本，避免 Rust 重编译与包冲突）
 
 # ---- 1) NPU 状态面板 ----
 # 仓库根目录自带标准 luci.mk Makefile，直接克隆到 package/ 即为一个合法 luci 包。
@@ -20,7 +20,8 @@ fi
 # 只取两个纯 Luci 展示包：
 #   luci-app-onu         顶级 ONU 菜单（状态/硬件身份/认证/上网/IPTV/语音/诊断）
 #   luci-app-pon-status  状态页光模块指标卡片
-# 依赖的 airoha-ponctl/airoha-pond 用 ponwrt feed 现有版本，不引入其 Rust daemon。
+# 依赖的 airoha-ponctl/airoha-pond 由 040G-MD-ubi 设备的 DEVICE_PACKAGES 自动带入，
+# 不引入 naoki66 的 Rust daemon，避免重编译与包冲突。
 if [ ! -d "./luci-app-onu" ] || [ ! -d "./luci-app-pon-status" ]; then
 	git clone --depth=1 --single-branch --branch main \
 		https://github.com/naoki66/OpenWrt_ONU_CONFIG.git ./__onu_cfg_tmp
