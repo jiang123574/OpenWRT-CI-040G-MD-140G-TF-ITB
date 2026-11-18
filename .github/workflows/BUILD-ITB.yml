@@ -1,5 +1,5 @@
 # 手动编译：Nokia XG-040G-MD(UBI) + XG-140G-TF(UBI) 的 sysupgrade.itb
-# 源码 pbs05/ponwrt master；一次编译同时产出两款机型的 .itb + recovery.itb
+# 源码 bingoguo93/immortalwrt @ 6.18 + AIROHA-MAIN；一次编译同时产出两款机型的 .itb + recovery.itb
 name: BUILD-ITB-040G-MD-140G-TF
 
 on:
@@ -23,18 +23,18 @@ concurrency:
 
 jobs:
   config:
-    name: AIROHA-ONU (040G-MD + 140G-TF)
+    name: AIROHA-MAIN (040G-MD + 140G-TF)
     uses: ./.github/workflows/WRT-CORE.yml
     with:
-      WRT_CONFIG: AIROHA-ONU
+      WRT_CONFIG: AIROHA-MAIN
       WRT_THEME: argon
       WRT_NAME: OWRT
       WRT_SSID: OWRT
       WRT_WORD: "12345678"
       WRT_IP: 192.168.1.1
       WRT_PW: 无
-      WRT_REPO: https://github.com/pbs05/ponwrt.git
-      WRT_BRANCH: master
-      WRT_SOURCE: pbs05/ponwrt
+      WRT_REPO: https://github.com/bingoguo93/immortalwrt.git
+      WRT_BRANCH: 6.18
+      WRT_SOURCE: bingoguo93/immortalwrt
       WRT_PACKAGE: ${{ inputs.PACKAGE || '' }}
       WRT_TEST: ${{ inputs.TEST == true }}
