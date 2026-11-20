@@ -6,12 +6,8 @@ name: AIR-ONU
 
 #CI计划
 on:
-  #自动编译：当Auto-Clean运行完成后
-  workflow_run:
-    workflows: ["Auto-Clean"]
-    types:
-      - completed
-  #手动编译
+  # 已移除 workflow_run 自动触发（Auto-Clean 完成后不再自动编译）
+  # 仅保留手动触发
   workflow_dispatch:
     inputs:
       PACKAGE:
