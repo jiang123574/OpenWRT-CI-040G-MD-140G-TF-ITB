@@ -30,4 +30,14 @@ if [ ! -d "./luci-app-onu" ] || [ ! -d "./luci-app-pon-status" ]; then
 	rm -rf ./__onu_cfg_tmp
 fi
 
+# ---- 修复：移除 luci-app-onu 的过时依赖 ----
+# naoki66 的 luci-app-onu Makefile 依赖 kmod-nf-conntrack-bridge，
+# 该内核包在 6.18 已不存在，会在最后的 package/install 阶段导致
+# "unable to select packages: kmod-nf-conntrack-bridge (no such package)"。
+# 依赖的 bridge conntrack 功能已并入内核，直接删掉该依赖即可（幂等）。
+# REMOVE stale dep kmod-nf-conntrack-bridge for 6.18
+if [ -f "./luci-app-onu/Makefile" ]; then
+	sed -i 's/ +kmod-nf-conntrack-bridge//g' ./luci-app-onu/Makefile
+fi
+
 echo "PRIVATE.sh: NPU panel + ONU optical display packages ready"
