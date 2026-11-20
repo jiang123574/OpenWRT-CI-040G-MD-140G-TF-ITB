@@ -4,8 +4,8 @@
 name: AIR-TCBOOT
 
 on:
-  schedule:
-    - cron: "0 3 * * *"   # 每天3点 UTC
+  # 已移除 schedule 定时触发（原每天 UTC 3 点 / 北京 11 点自动编译）
+  # 仅保留手动触发
   workflow_dispatch:
     inputs:
       PACKAGE:
